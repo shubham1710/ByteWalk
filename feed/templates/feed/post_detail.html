@@ -1,0 +1,93 @@
+{% extends "feed/layout.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block cssfiles %}
+{% endblock cssfiles %}
+{% block searchform %}
+<form class="form-inline my-2 my-lg-0 ml-5" action="{% url 'search_posts' %}" method="get">
+  <input name="p" type="text" placeholder="Search posts by tags..">
+  <button class="btn btn-success my-2 my-sm-0 ml-4" type="submit">Search</button>
+</form>
+{% endblock searchform %}
+{% block content %}
+	<div class="container">
+	    <div class="row">
+	      <div class="col-md-8">
+	        <div class="card card-signin my-5">
+	          <div class="card-body">
+	          	<a href="{{ post.user_name.profile.get_absolute_url }}"><img src="{{ post.user_name.profile.image.url }}" class="rounded-circle" width="30" height="30" alt=""></a>
+	          	<a class="text-dark" href="{{ post.user_name.profile.get_absolute_url }}"><b>{{ post.user_name }}</b></a>
+	          	<br><small class="text-muted">Posted on {{ post.date_posted }}</small>
+	          	<br><br>
+	            <p class="card-text text-dark">{{ post.description }}</p>
+	          </div>
+	          <a href="{{ post.pic.url }}"><img class="card-img-top" src="{{ post.pic.url }}" alt=""></a>
+	          {% if post.tags %}
+	          <br><p class="text-danger ml-3"><b>Tags: <i>{{ post.tags }}</i></b></p>
+	          {% endif %}
+	          <div class="card-footer">
+	          	{% if is_liked %}
+	          	<a class="btn btn-success mr-3" href="{% url 'like' post.id %}">Like | {{ post.likes.count }}</a>
+	          	{% else %}
+	          	<a class="btn btn-outline-success mr-3" href="{% url 'like' post.id %}">Like | {{ post.likes.count }}</a>
+	          	{% endif %}
+	          	{% if post.user_name == user %}
+				<a class="btn btn-outline-info mr-3" href="{% url 'post-update' post.id %}">Update</a>
+				<a class="btn btn-outline-danger" href="{% url 'post-delete' post.id %}">Delete</a>
+				{% endif %}
+	          </div>
+	        </div>
+	  	   </div>
+	  	   <div class="col-md-4">
+	  	   	<div class="card card-signin my-5">
+	  	   		<a href="{{ post.user_name.profile.get_absolute_url }}"><img class="card-img-top" src="{{ post.user_name.profile.image.url }}" alt=""></a>
+	            <div class="card-body">
+	           		<h5 class="card-title text-center">{{ post.user_name }}</h5>
+	           		<h6 class="text-center">{{ post.user_name.profile.friends.count }} <p class="text-muted">Friends</p></h6>
+	           		<p class="card-text text-center">{{ post.user_name.profile.bio }}</p>
+	            </div>
+	       </div>
+	   	</div>
+	    </div>
+	    <br>
+	    <h4>Comments</h4>
+	    <div class="row">
+	    	<div class="col-md-8">
+	    		<div class="card card-signin my-5">
+	    			<div class="card-body">
+	    				<form class="form-signin" method = "POST">
+	    					{% csrf_token %}
+				            <fieldset class="form-group"><br>
+				                {{ form|crispy }}
+				            </fieldset>
+				            <div class="form-group">
+				                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Comment</button><br>
+				            </div>
+	    			</div>
+	    		</div>
+	    	</div>
+	    </div>
+	    <div class="row">
+	    	<div class="col-md-8">
+	    		{% if post.details.all %}
+	    		<div class="card card-signin my-5">
+	    		{% for detail in post.details.all %}
+	    			<div class="card-body">
+	    				<a href="{{ detail.username.profile.get_absolute_url }}">
+	    					<img src="{{ detail.username.profile.image.url }}" class="rounded-circle" width="30" height="30" alt="">
+	    				</a>
+	          			<a class="text-dark" href="{{ detail.username.profile.get_absolute_url }}"><b>{{ detail.username }}</b></a>
+	          			<br><small>{{ detail.comment_date }}</small><br><br>
+	          			<p class="card-text text-dark">{{ detail.comment }}</p>
+	    			</div>
+	    			<hr class="my-1">
+	    		{% endfor %}
+	    		</div>
+	    		{% else %}
+	    			<p>No comments to show!</p>
+	    		{% endif %}
+	    	</div>
+	    </div>
+	</div>
+{% endblock content %}
+{% block jsfiles %}{% endblock jsfiles %}

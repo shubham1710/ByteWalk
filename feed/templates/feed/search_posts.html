@@ -1,0 +1,54 @@
+{% extends "feed/layout.html" %}
+{% load static %}
+{% block cssfiles %}
+{% endblock cssfiles %}
+{% block searchform %}
+<form class="form-inline my-2 my-lg-0 ml-5" action="{% url 'search_posts' %}" method="get">
+  <input name="p" type="text" placeholder="Search posts..">
+  <button class="btn btn-success my-2 my-sm-0 ml-4" type="submit">Search</button>
+</form>
+{% endblock searchform %}
+{% block content %}
+ 	<div class="container">
+	    <div class="row">
+	      <div class="col-md-8">
+	      	{% if not posts %}
+	      	<br>
+	      	<h2><i>No posts match the tag provided!</i></h2>
+	      	{% endif %}
+	      	<p>{{ post }}</p>
+	        {% for post in posts %}
+	        <div class="card card-signin my-5">
+	          <div class="card-body">
+	          	<a href="{{ post.user_name.profile.get_absolute_url }}"><img src="{{ post.user_name.profile.image.url }}" class="rounded-circle" width="30" height="30" alt=""></a>
+	          	<a class="text-dark" href="{{ post.user_name.profile.get_absolute_url }}"><b>{{ post.user_name }}</b></a>
+	          	<br><small class="text-muted">Posted on {{ post.date_posted }}</small>
+	          	<br><br>
+	            <p class="card-text text-dark">{{ post.description }}</p>
+	          </div>
+	          <a href="{% url 'post-detail' post.id %}"><img class="card-img-top" src="{{ post.pic.url }}" alt=""></a>
+	          {% if post.tags %}
+	          <br><p class="text-danger ml-3"><b>Tags: <i>{{ post.tags }}</i></b></p>
+	          {% endif %}
+	          <div class="card-footer">
+	          	<a class="btn btn-outline-success mr-4" href="{% url 'like' post.id %}">Like | {{ post.likes.count }}</a>
+	          	<a class="btn btn-outline-info" href="{% url 'post-detail' post.id %}">Comments | {{ post.details.count }}</a>
+	          </div>
+	        </div>
+	        {% endfor %}
+	  	   </div>
+	  	   <div class="col-md-4">
+	  	   	<div class="card card-signin my-5">
+	  	   		<a href="{{ request.user.profile.get_absolute_url }}"><img class="card-img-top" src="{{ request.user.profile.image.url }}" alt=""></a>
+	            <div class="card-body">
+	           		<h5 class="card-title text-center">{{ request.user }}</h5>
+	           		<h6 class="text-center">{{ request.user.profile.friends.count }} <p class="text-muted">Friends</p></h6>
+	           		<p class="card-text text-center">{{ request.user.profile.bio }}</p>
+	            </div>
+	       </div>
+	    </div>
+	    </div>
+	</div>
+
+{% endblock content %}
+{% block jsfiles %}{% endblock jsfiles %}
