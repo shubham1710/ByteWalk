@@ -141,7 +141,7 @@ EMAIL_HOST_PASSWORD = '**************'
 DEFAULT_FILE_STORAGE = 'django_gcloud_storage.DjangoGCloudStorage'
 
 GCS_PROJECT = "*********"
-GCS_BUCKET = "**********8"
+GCS_BUCKET = "**********"
 GCS_CREDENTIALS_FILE_PATH = os.path.join(BASE_DIR, "keyfile.json")
 GCS_USE_UNSIGNED_URLS = True
 
