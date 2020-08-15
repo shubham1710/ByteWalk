@@ -1,0 +1,50 @@
+{% extends "feed/layout.html" %}
+{% load static %}
+{% block cssfiles %}
+{% endblock cssfiles %}
+{% block searchform %}
+<form class="form-inline my-2 my-lg-0 ml-5" action="{% url 'search_users' %}" method="get">
+  <input name="q" type="text" placeholder="Search users..">
+  <button class="btn btn-success my-2 my-sm-0 ml-4" type="submit">Search</button>
+</form>
+{% endblock searchform %}
+{% block content %}
+	<div class="container">
+	    <div class="row">
+	      <div class="col-md-8">
+	      	{% if users %}
+	      	<div class="card card-signin my-5">
+	        <div class="card-body">
+	        {% for user_p in users %}
+	          	<a href="{{ user_p.get_absolute_url }}"><img src="{{ user_p.image.url }}" class="rounded mr-2" width="40" height="40" alt=""></a>
+	          	<a class="text-dark" href="{{ user_p.get_absolute_url }}"><b>{{ user_p }}</b></a>
+	          	{% if not user_p.user in sent %}
+	          	<small class="float-right">
+	                <a class='btn btn-primary mr-2' href="{% url 'send_friend_request' user_p.id %}">Add Friend</a>
+	            </small>
+	            {% else %}
+	            <small class="float-right">
+	                <a class='btn btn-warning mr-2' href="{% url 'cancel_friend_request' user_p.id %}">Cancel Request</a>
+	            </small>
+	          	{% endif %}
+	          	<br><br>
+	        {% endfor %}
+	    	</div>
+	    	</div>
+	        {% else %}
+	        <h5><i>No new people to add now! Please come back later!</i></h5>
+	        {% endif %}
+	  	   </div>
+	  	   <div class="col-md-4">
+	  	   	<div class="card card-signin my-5">
+	  	   		<a href="{{ request.user.profile.get_absolute_url }}"><img class="card-img-top" src="{{ request.user.profile.image.url }}" alt=""></a>
+	            <div class="card-body">
+	           		<h5 class="card-title text-center">{{ request.user }}</h5>
+	           		<h6 class="text-center">{{ request.user.profile.friends.count }} <p class="text-muted">Friends</p></h6>
+	           		<p class="card-text text-center">{{ request.user.profile.bio }}</p>
+	            </div>
+	       </div>
+	    </div>
+	</div>
+{% endblock content %}
+{% block jsfiles %}{% endblock jsfiles %}
