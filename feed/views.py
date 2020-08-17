@@ -92,6 +92,7 @@ def like(request, pk):
 		new_like.delete()
 	return redirect('post-detail', pk=pk)
 
+#search posts tag
 @login_required
 def search_posts(request):
 	query = request.GET.get('p')
