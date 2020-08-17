@@ -26,11 +26,14 @@
 	          <br><p class="text-danger ml-3"><b>Tags: <i>{{ post.tags }}</i></b></p>
 	          {% endif %}
 	          <div class="card-footer">
-	          	{% if is_liked %}
-	          	<a class="btn btn-success mr-3" href="{% url 'like' post.id %}">Like | {{ post.likes.count }}</a>
-	          	{% else %}
-	          	<a class="btn btn-outline-success mr-3" href="{% url 'like' post.id %}">Like | {{ post.likes.count }}</a>
-	          	{% endif %}
+	          	<button class="btn btn-white mr-3 like" id="{{ post.id }}">
+			        {% if is_liked %}
+			            <a href="{% url 'post-like' %}" style="color:red;" id="likebtn{{ post.id }}"> Unlike | {{post.likes.count}}</a>
+			        {% else %}
+			            <a href="{% url 'post-like' %}" style="color:green;" id="likebtn{{ post.id }}"> Like | {{post.likes.count}}</a>
+			        {% endif %}
+			    </button>
+
 	          	{% if post.user_name == user %}
 				<a class="btn btn-outline-info mr-3" href="{% url 'post-update' post.id %}">Update</a>
 				<a class="btn btn-outline-danger" href="{% url 'post-delete' post.id %}">Delete</a>
@@ -38,16 +41,6 @@
 	          </div>
 	        </div>
 	  	   </div>
-	  	   <div class="col-md-4">
-	  	   	<div class="card card-signin my-5">
-	  	   		<a href="{{ post.user_name.profile.get_absolute_url }}"><img class="card-img-top" src="{{ post.user_name.profile.image.url }}" alt=""></a>
-	            <div class="card-body">
-	           		<h5 class="card-title text-center">{{ post.user_name }}</h5>
-	           		<h6 class="text-center">{{ post.user_name.profile.friends.count }} <p class="text-muted">Friends</p></h6>
-	           		<p class="card-text text-center">{{ post.user_name.profile.bio }}</p>
-	            </div>
-	       </div>
-	   	</div>
 	    </div>
 	    <br>
 	    <h4>Comments</h4>
@@ -90,4 +83,29 @@
 	    </div>
 	</div>
 {% endblock content %}
-{% block jsfiles %}{% endblock jsfiles %}
+{% block jsfiles %}
+<script>
+	$(".like").click(function (e) {
+    var id = this.id;
+    var href = $('.like').find('a').attr('href');
+    e.preventDefault();
+
+    $.ajax({
+        url: href,
+        data: {
+          'likeId': id
+        },
+        success: function(response){
+          if(response.liked){
+            $('#likebtn' + id).html("Unlike | {{post.likes.count}}");
+            $('#likebtn' + id).css("color", "red")
+          }
+          else{
+            $('#likebtn' + id).html("Like | {{post.likes.count}}");
+            $('#likebtn' + id).css("color", "green")
+          }
+        }
+      })
+});
+</script>
+{% endblock jsfiles %}
