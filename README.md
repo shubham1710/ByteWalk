@@ -1,7 +1,7 @@
 # ByteWalk
 A social media photo sharing website built on Django Framework.
 
-The features available to users :-
+The features available for users :-
 1) Post images.  A short description and tags can be included if desired by user.
 2) See everyone's post and can like and comment on the photos.
 3) Users can edit or delete their photos too.
@@ -10,7 +10,7 @@ The features available to users :-
 6) Registeration system is complete with password reset option available to users.
 7) Users can edit their profile with their profile pic and a short bio about them.
 8) Users can view other users profile and can send them friend requests.
-9) Users can send friend request, cancel requests, accept requests, reject requests or even unfriend their friends.
+9) Users can send Friend Requests, Cancel Requests, Accept Requests, Ignore Requests or even unfriend your friends.
 10) Users are given suggestions for new friends based on mutual friendships.
 
 Technologies used :-
