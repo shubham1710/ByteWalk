@@ -3,13 +3,13 @@ A social media photo sharing website built on Django Framework.
 
 The features available to users :-
 1) Post images.  A short description and tags can be included if desired by user.
-2) See everyone's post and can like and comment on the photos.
+2) can check everyone's post and also like and comment on the photos.
 3) Users can edit or delete their photos too.
 4) Users can search for posts by tags and for other users by their username.
 5) Without authentication, users can view the posts but cannot like or comment.
-6) Registeration system is complete with password reset option available to users.
-7) Users can edit their profile with their profile pic and a short bio about them.
-8) Users can view other users profile and can send them friend requests.
+6) Registeration system is complete with password reset option also available to users.
+7) Users can edit their profile including profile pic and a short bio about them.
+8) Users can view profile of others users and can send them friend requests.
 9) Users can send friend request, cancel requests, accept requests, reject requests or even unfriend their friends.
 10) Users are given suggestions for new friends based on mutual friendships.
 
@@ -20,3 +20,5 @@ Technologies used :-
 4) Deployment: Heroku
 
 Try it out at: http://bytewalk.me
+
+you should probably try the website to check on on some new features.
