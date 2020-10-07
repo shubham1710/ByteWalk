@@ -21,4 +21,6 @@ Technologies used :-
 
 Try it out at: http://bytewalk.me
 
-you should probably try the website to check on on some new features.
+You should probably try the website to check on on some new features.
+
+This repository is open for contribution. If you have any improvement in mind, you should make the pull request with relevant details and I shall add it.
