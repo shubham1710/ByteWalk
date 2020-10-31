@@ -90,15 +90,12 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 			return True
 		return False
 
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-	model = Post
-	success_url = '/'
-
-	def test_func(self):
-		post = self.get_object()
-		if self.request.user == post.user_name:
-			return True
-		return False
+@login_required
+def post_delete(request, pk):
+	post = Post.objects.get(pk=pk)
+	if request.user== post.user_name:
+		Post.objects.get(pk=pk).delete()
+	return redirect('home')
 
 
 @login_required
