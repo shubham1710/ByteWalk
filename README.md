@@ -19,7 +19,7 @@ Technologies used :-
 3) Storage: Google Cloud Storage
 4) Deployment: Heroku
 
-Try it out at: http://bytewalk.me
+Try it out at: http://bytewalk.me (no upload would work and also no previous uploads would be available due to termination of Google cloud bucket to avoid charges).
 
 You should probably try the website to check on on some new features.
 
