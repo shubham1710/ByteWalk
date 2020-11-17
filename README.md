@@ -19,8 +19,7 @@ Technologies used :-
 3) Storage: Google Cloud Storage
 4) Deployment: Heroku
 
-Try it out at: http://bytewalk.me (no upload would work and also no previous uploads would be available due to termination of Google cloud bucket to avoid charges).
-
-You should probably try the website to check on on some new features.
+To try out the website, please download the repository in your local system and provide all the local variables as per your requirements. Switch to your local storage or keep using Google Cloud but make sure to create an account on Google Cloud Storage and create buckets and put in the id wherever needed in the code (settings.py file).
+In this way, you would be able to run it in your local machine! Do try it out!
 
 This repository is open for contribution. If you have any improvement in mind, you should make the pull request with relevant details and I shall add it.
