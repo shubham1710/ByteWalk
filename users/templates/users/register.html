@@ -1,31 +1,36 @@
-{% extends "feed/layout.html" %}
-{% load crispy_forms_tags %}
-{% load static %}
-{% block cssfiles %}
-
-{% endblock cssfiles %}
+{% extends "feed/layout.html" %} {% load crispy_forms_tags %} {% load static %}
 {% block content %}
-<br>
+<br />
 <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-9 col-lg-7 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center"><b>Register</b></h5>
-            <form class="form-signin" method = "POST">
+  <div class="row">
+    <div class="col-sm-9 col-md-9 col-lg-7 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center"><b>Register</b></h5>
+          <form class="form-signin" method="POST">
             {% csrf_token %}
-            <fieldset class="form-group"><br>
-                {{ form|crispy }}
+            <fieldset class="form-group">
+              <br />
+              {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button><br><br>
+              <button
+                class="btn btn-lg btn-primary btn-block text-uppercase"
+                type="submit"
+              >
+                Sign Up</button
+              ><br /><br />
             </div>
-            <small><p class="text-center">Already Registered! <a href="{% url 'login' %}"><b>Login Now!</b></a></p></small>
-        </form>
+            <small
+              ><p class="text-center">
+                Already Registered!
+                <a href="{% url 'login' %}"><b>Login Now!</b></a>
+              </p></small
+            >
+          </form>
+        </div>
+      </div>
     </div>
-    </div>
-    </div>
-    </div>
+  </div>
 </div>
 {% endblock content %}
-{% block jsfiles %}{% endblock jsfiles %}

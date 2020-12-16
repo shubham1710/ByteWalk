@@ -48,7 +48,7 @@
 	    	<div class="col-md-8">
 	    		<div class="card card-signin my-5">
 	    			<div class="card-body">
-	    				<form class="form-signin" method = "POST">
+	    				<form class="form-signin" method = "POST" id="post-form">
 	    					{% csrf_token %}
 				            <fieldset class="form-group"><br>
 				                {{ form|crispy }}
@@ -108,4 +108,5 @@
       })
 });
 </script>
+
 {% endblock jsfiles %}

@@ -79,6 +79,9 @@ def accept_friend_request(request, id):
 	user2 = from_user
 	user1.profile.friends.add(user2.profile)
 	user2.profile.friends.add(user1.profile)
+	if(FriendRequest.objects.filter(from_user=request.user, to_user=from_user).first()):
+		request_rev = FriendRequest.objects.filter(from_user=request.user, to_user=from_user).first()
+		request_rev.delete()
 	frequest.delete()
 	return HttpResponseRedirect('/users/{}'.format(request.user.profile.slug))
 
@@ -115,6 +118,11 @@ def profile_view(request, slug):
 		if len(FriendRequest.objects.filter(
 			from_user=request.user).filter(to_user=p.user)) == 1:
 				button_status = 'friend_request_sent'
+
+		# if we have recieved a friend request
+		if len(FriendRequest.objects.filter(
+			from_user=p.user).filter(to_user=request.user)) == 1:
+				button_status = 'friend_request_received'
 
 	context = {
 		'u': u,
@@ -176,6 +184,10 @@ def my_profile(request):
 		if len(FriendRequest.objects.filter(
 			from_user=request.user).filter(to_user=you)) == 1:
 				button_status = 'friend_request_sent'
+
+		if len(FriendRequest.objects.filter(
+			from_user=p.user).filter(to_user=request.user)) == 1:
+				button_status = 'friend_request_received'
 
 	context = {
 		'u': you,

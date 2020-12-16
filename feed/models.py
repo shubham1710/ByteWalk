@@ -13,6 +13,7 @@ class Post(models.Model):
 	def __str__(self):
 		return self.description
 
+
 	def get_absolute_url(self):
 		return reverse('post-detail', kwargs={'pk': self.pk})
  
@@ -25,5 +26,4 @@ class Comments(models.Model):
 
 class Like(models.Model):
 	user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
-	post = models.ForeignKey(Post, related_name='likes', on_delete=models.CASCADE)
-	
+	post = models.ForeignKey(Post, related_name='likes', on_delete=models.CASCADE)	
