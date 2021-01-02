@@ -1,74 +1,104 @@
-{% extends "feed/layout.html" %}
-{% load static %}
-{% block cssfiles %}
-{% endblock cssfiles %}
-{% block searchform %}
-<form class="form-inline my-2 my-lg-0 ml-5" action="{% url 'search_posts' %}" method="get">
-  <input name="p" type="text" placeholder="Search posts..">
-  <button class="btn btn-success my-2 my-sm-0 ml-4" type="submit">Search</button>
+{% extends "feed/layout.html" %} {% load static %} {% block cssfiles %} {%
+endblock cssfiles %} {% block searchform %}
+<form
+  class="form-inline my-2 my-lg-0 ml-5"
+  action="{% url 'search_posts' %}"
+  method="get"
+>
+  <input name="p" type="text" placeholder="Search posts.." />
+  <button class="btn btn-success my-2 my-sm-0 ml-4" type="submit">
+    Search
+  </button>
 </form>
-{% endblock searchform %}
-{% block content %}
- 	<div class="container">
-	    <div class="row">
-	      <div class="col-md-8">
-	      	{% if not posts %}
-	      	<br>
-	      	<h2><i>No posts match the tag provided!</i></h2>
-	      	{% endif %}
-	      	
-	        {% for post in posts %}
-	        <div class="card card-signin my-5">
-	          <div class="card-body">
-	          	<a href="{{ post.user_name.profile.get_absolute_url }}"><img src="{{ post.user_name.profile.image.url }}" class="rounded-circle" width="30" height="30" alt=""></a>
-	          	<a class="text-dark" href="{{ post.user_name.profile.get_absolute_url }}"><b>{{ post.user_name }}</b></a>
-	          	<br><small class="text-muted">Posted on {{ post.date_posted }}</small>
-	          	<br><br>
-	            <p class="card-text text-dark">{{ post.description }}</p>
-	          </div>
-	          <a href="{% url 'post-detail' post.id %}"><img class="card-img-top" src="{{ post.pic.url }}" alt=""></a>
-	          {% if post.tags %}
-	          <br><p class="text-danger ml-3"><b>Tags: <i>{{ post.tags }}</i></b></p>
-	          {% endif %}
-	          <div class="card-footer">
-	          	<button class="btn btn-white mr-3 like" id="{{ post.id }}">
-			        {% if post in liked_post %}
-			            <a href="{% url 'post-like' %}" style="color:red;" id="likebtn{{ post.id }}"> Unlike</a> | {{post.likes.count}}
-			        {% else %}
-			            <a href="{% url 'post-like' %}" style="color:green;" id="likebtn{{ post.id }}"> Like</a> | {{post.likes.count}}
-			        {% endif %}
-			    </button>
-	          	<a class="btn btn-outline-info" href="{% url 'post-detail' post.id %}">Comments | {{ post.details.count }}</a>
-	          </div>
-	        </div>
-	        {% endfor %}
-	  	   </div>
-	    </div>
-	</div>
-{% endblock content %}
-{% block jsfiles %}
+{% endblock searchform %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      {% if not posts %}
+      <br />
+      <h2><i>No posts match the tag provided!</i></h2>
+      {% endif %} {% for post in posts %}
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <a href="{{ post.user_name.profile.get_absolute_url }}"
+            ><img
+              src="{{ post.user_name.profile.image.url }}"
+              class="rounded-circle"
+              width="30"
+              height="30"
+              alt=""
+          /></a>
+          <a
+            class="text-dark"
+            href="{{ post.user_name.profile.get_absolute_url }}"
+            ><b>{{ post.user_name }}</b></a
+          >
+          <br /><small class="text-muted"
+            >Posted on {{ post.date_posted }}</small
+          >
+          <br /><br />
+          <p class="card-text text-dark">{{ post.description }}</p>
+        </div>
+        <a href="{% url 'post-detail' post.id %}"
+          ><img class="card-img-top" src="{{ post.pic.url }}" alt=""
+        /></a>
+        {% if post.tags %}
+        <br />
+        <p class="text-danger ml-3">
+          <b>Tags: <i>{{ post.tags }}</i></b>
+        </p>
+        {% endif %}
+        <div class="card-footer">
+          <button class="btn btn-white mr-3 like" id="{{ post.id }}">
+            {% if post in liked_post %}
+            <a
+              href="{% url 'post-like' %}"
+              style="color: red"
+              id="likebtn{{ post.id }}"
+            >
+              Unlike</a
+            >
+            | {{post.likes.count}} {% else %}
+            <a
+              href="{% url 'post-like' %}"
+              style="color: green"
+              id="likebtn{{ post.id }}"
+            >
+              Like</a
+            >
+            | {{post.likes.count}} {% endif %}
+          </button>
+          <a class="btn btn-outline-info" href="{% url 'post-detail' post.id %}"
+            >Comments | {{ post.details.count }}</a
+          >
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %} {% block jsfiles %}
 <script>
-	$(".like").click(function (e) {
+  $(".like").click(function (e) {
     var id = this.id;
-    var href = $('.like').find('a').attr('href');
+    var href = $(".like").find("a").attr("href");
     e.preventDefault();
 
     $.ajax({
-        url: href,
-        data: {
-          'likeId': id
-        },
-        success: function(response){
-          if(response.liked){
-            $('#likebtn' + id).html("Unlike");
-            $('#likebtn' + id).css("color", "red")
-          }
-          else{
-            $('#likebtn' + id).html("Like");
-            $('#likebtn' + id).css("color", "green")
-          }
+      url: href,
+      data: {
+        likeId: id,
+      },
+      success: function (response) {
+        if (response.liked) {
+          $("#likebtn" + id).html("Unlike");
+          $("#likebtn" + id).css("color", "red");
+        } else {
+          $("#likebtn" + id).html("Like");
+          $("#likebtn" + id).css("color", "green");
         }
-      })
-});
+      },
+    });
+  });
 </script>
 {% endblock jsfiles %}
