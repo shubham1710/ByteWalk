@@ -1,5 +1,5 @@
 # ByteWalk
-A social media photo sharing website built on Django Framework.
+A social media photo sharing website built on [Django Framework](https://djangoproject.com/).
 
 The features available to users :-
 1) Post images.  A short description and tags can be included if desired by user.
@@ -15,9 +15,9 @@ The features available to users :-
 
 Technologies used :-
 1) Frontend: HTML5, CSS (Bootstrap4 + Custom CSS), AJAX
-2) Backend: Django
-3) Storage: Google Cloud Storage
-4) Deployment: Heroku
+2) Backend: [Django](https://djangoproject.com/)
+3) Storage: [Google Cloud Storage](https://cloud.google.com/)
+4) Deployment: [Heroku](https://heroku.com/)
 
 To try out the website, please download the repository in your local system and provide all the local variables as per your requirements. Switch to your local storage or keep using Google Cloud but make sure to create an account on Google Cloud Storage and create buckets and put in the id wherever needed in the code (settings.py file).
 In this way, you would be able to run it in your local machine! Do try it out!
