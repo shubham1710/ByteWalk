@@ -35,6 +35,6 @@ jobs:
       if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: |
         pipenv install --deploy --dev
-    - name: Run Tests
+    - name: Run User Tests
       run: |
-        python manage.py test
+        python manage.py users.test
