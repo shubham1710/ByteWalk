@@ -37,7 +37,7 @@ jobs:
     - name: Install dependencies
       if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: |
-        pipenv install --deploy --dev
+        pipenv install --deploy --dev --system
     - name: Run User Tests
       run: |
         python manage.py test users.tests
