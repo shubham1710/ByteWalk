@@ -19,6 +19,7 @@ jobs:
         python-version: [3.7, 3.8, 3.9, '3.10']
     env: 
       DJANGO_SECRET_KEY: "this value doesn't matter"
+      ENVIRONMENT: github
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}

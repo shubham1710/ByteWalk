@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django_heroku
+
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -152,4 +152,6 @@ GCS_BUCKET = os.environ.get('GCS_BUCKET')
 GCS_CREDENTIALS_FILE_PATH = os.path.join(BASE_DIR, "my-key.json")
 GCS_USE_UNSIGNED_URLS = True
 
-django_heroku.settings(locals())
+if os.environ.get('ENVIRONMENT') != 'github':
+    import django_heroku
+    django_heroku.settings(locals())
