@@ -13,18 +13,26 @@ class RegistrationTestCase(TestCase):
             'password1': 'respondBloating291', 
             'password2': 'respondBloating291'
         })
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/register.html')
+        self.assertEqual(response.status_code, 302) # successful registration redirects client
 
     def test_login(self):
         c = Client()
 
         response = c.post('/login/',{
             'username': 'portcommunion',
+            'password': 'respondBoating291'
+        })
+
+        # I'm crying 
+        # failed login gives a 200 response smh
+        self.assertEqual(response.status_code, 200)
+
+        response = c.post('/login/',{
+            'username': 'portcommunion',
             'password': 'respondBloating291'
         })
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'users/profile.html')
+
+        self.assertEqual(response.status_code, 302)
 
     
         
