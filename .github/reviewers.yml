@@ -1,7 +1,21 @@
 #this is a configuration file used by the community action used in /workflows/request_pr_approval.yml
+#attribution: https://github.com/marketplace/actions/auto-request-review
 
 reviewers:
+
   defaults:
-    - ericskelton
-    - taimurkashif02
-    - kgabriel113
+    group-project
+
+  groups:
+    group-project:
+      - ericskelton
+      - taimurkashif02
+      - kgabriel113
+
+  per_author:
+    group-project:
+      - group-project
+
+files:
+  '**':
+    - group-project
