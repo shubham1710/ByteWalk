@@ -1,0 +1,15 @@
+on:
+pull_request:
+    types: [opened, reopened]
+    branches: 
+      - master 
+      - develop
+
+jobs:
+  request_reviews:
+    name: Requesting reviews
+    steps:
+    - name: Auto Request Review
+      uses: necojackarc/auto-request-review@v0.7.0
+      with:
+        config: .github/reviewers.yml
