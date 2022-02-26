@@ -19,3 +19,8 @@ reviewers:
 files:
   '**':
     - group-project
+
+options:
+  ignore_draft: false
+  ignored_keywords:
+    - NOREVIEW
