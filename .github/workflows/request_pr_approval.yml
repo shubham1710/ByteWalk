@@ -1,15 +1,15 @@
 on:
-pull_request:
-    types: [opened, reopened]
-    branches: 
-      - master 
-      - develop
-
+    pull_request:
+        types: [opened, reopened]
+        branches: 
+          - master 
+          - develop
 jobs:
-  request_reviews:
+  request-reviewa:
     name: Requesting reviews
+    runs-on: ubuntu-latest
     steps:
-    - name: Auto Request Review
-      uses: necojackarc/auto-request-review@v0.7.0
-      with:
-        config: .github/reviewers.yml
+      - name: Request reviews from everyone
+        uses: necojackarc/auto-request-review@v0.7.0
+        with:
+          config: .github/reviewers.yml # Config file location override
