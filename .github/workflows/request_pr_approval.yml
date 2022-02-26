@@ -1,0 +1,15 @@
+on:
+  pull_request:
+    branches: 
+      - master 
+      - develop 
+jobs:
+  request-reviewa:
+    name: Requesting reviews
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request reviews from everyone
+        uses: necojackarc/auto-request-review@v0.7.0
+        with:
+          config: .github/reviewers.yml
+          token: ${{ secrets.GITHUB_TOKEN }}
